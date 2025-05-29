@@ -33,7 +33,7 @@ This container provides encrypted DNS-over-HTTPS via Tor using [Cloudflared](htt
   #- `6053/udp` – DNS (backup upstream)  #uncomment
   - `9100` – Metrics for primary
   - `9200` – Metrics for backup
-- **Host Ports**:                        #Optional, you do not need these if the service is only avaialble within docker
+- **Host Ports**: (Optional, you do not need these if the service is only availble within docker)
   - `53:53/udp` – DNS (main upstream)
   - `6053:6053/udp` – DNS (backup upstream)
 ---
