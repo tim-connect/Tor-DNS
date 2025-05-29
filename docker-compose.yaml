@@ -23,5 +23,4 @@ services:
       - NET_ADMIN
 
 networks:
-  dns_net:
-    driver: bridge
+  dns_net
