@@ -12,7 +12,7 @@ socat TCP4-LISTEN:443,bind=127.0.0.1,reuseaddr,fork SOCKS4A:127.0.0.1:dns4torpnl
 sleep 2
 
 #backup public resolver
-socat TCP-LISTEN:443,bind=127.0.0.2,reuseaddr,fork SOCKS4A:127.0.0.1:1.1.1.1:443,socksport=9050 &
+socat TCP4-LISTEN:443,bind=127.0.0.2,reuseaddr,fork SOCKS4A:127.0.0.1:1.1.1.1:443,socksport=9050 &
 sleep 2
 
 cat << EOF >> /etc/hosts
