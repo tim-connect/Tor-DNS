@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+
+  tor-dns-proxy:
+    container_name: tor-dns-proxy
+    build: .
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", 'dig @127.0.0.1 -p 53 cloudflare.com A +short > /dev/null && dig @127.0.0.1 -p 6053 cloudflare.com A +short > /dev/null']
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    expose:                    #this provides access from within docker only, see the ports section for more information
+      - "53/udp"
+      - "6053/udp"             #backup public resolver, routed through tor
+      - "9100"                 #hidden metrics
+      - "9200"                 #public metrics
+    #ports:                    #uncomment these options to enable access from your local machine, and comment out the two matching entries under "expose"
+    #  - "53:53/udp"
+    #  - "6053:6053/udp"
+    networks:
+      - dns_net
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  dns_net:
+    driver: bridge
