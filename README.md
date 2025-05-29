@@ -29,13 +29,11 @@ This container provides encrypted DNS-over-HTTPS via Tor using [Cloudflared](htt
 - **Primary DoH**: `.onion` DoH endpoint (Cloudflare)
 - **Backup DoH**: Clearnet DoH via Tor SOCKS proxy
 - **Ports Exposed (internally only)**:
-  #- `53/udp` – DNS (main upstream)      #uncomment these lines if the service is only going to be available within docker
-  #- `6053/udp` – DNS (backup upstream)  #uncomment
+  - `53/udp` – DNS (main upstream)
+  - `6053/udp` – DNS (backup upstream)
   - `9100` – Metrics for primary
-  - `9200` – Metrics for backup
-- **Host Ports**: (Optional, you do not need these if the service is only availble within docker)
-  - `53:53/udp` – DNS (main upstream)
-  - `6053:6053/udp` – DNS (backup upstream)
+  - `9200` – Metrics for backup 
+- **External access is easily configurable, see docker-compose.yaml for details**
 ---
 
 ## 🧪 Health Checks
