@@ -47,4 +47,4 @@ dig @127.0.0.1 -p 6053 cloudflare.com A +short
 
 ## Caveats
 
-This setup is not suitable for all services. While a good upstream for services that can cache responses like AdGuard, Unbound or dnsmasq, it can be an issue for services that may rely on IPs that change often such as DDNS
+This setup is not suitable for all services. While a good upstream for services that can cache responses like AdGuard, Unbound or dnsmasq, it can be an issue for services that may rely on IPs that change often such as DDNS if it accesses the torproxy through a cache.
