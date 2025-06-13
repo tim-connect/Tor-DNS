@@ -10,8 +10,9 @@ This project sets up a Dockerized DNS proxy that routes **all DNS queries throug
 ## What This Stack Includes
 
 - **Dual upstreams**:
-  - `cloudflared` → **Cloudflare’s hidden DoH resolver** (`.onion`)
-  - `cloudflared` → **Clearnet Cloudflare DoH** via Tor SOCKS as fallback
+  - `dnscrypt-proxy`
+       → **Cloudflare’s hidden DoH resolver** (`.onion`)
+       → **Clearnet Cloudflare DoH** via Tor SOCKS as fallback
 - **Full Tor routing** via a local Tor daemon
 - **Healthchecks**: Ensures both upstreams are live before marking container healthy
 - **Custom loopback routing** (`127.0.0.2`) to isolate upstreams inside the container
@@ -24,13 +25,12 @@ This project sets up a Dockerized DNS proxy that routes **all DNS queries throug
 
 ### `tor-dns-proxy`
 
-This container provides encrypted DNS-over-HTTPS via Tor using [Cloudflared](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/cloudflared-proxy/).
+This container provides encrypted DNS-over-HTTPS via Tor using [dnscrypt-proxy](https://github.com/DNSCrypt/dnscrypt-proxy/tree/master).
 
 - **Primary DoH**: `.onion` DoH endpoint (Cloudflare)
 - **Backup DoH**: Clearnet DoH via Tor SOCKS proxy
 - **Ports Exposed (internally only)**:
-  - `53/udp` – DNS (main upstream)
-  - `6053/udp` – DNS (backup upstream)
+  - `53/udp` – DNS
   - `9100` – Metrics for primary
   - `9200` – Metrics for backup 
 - **External access is easily configurable, see docker-compose.yaml for details**
@@ -42,7 +42,6 @@ Docker health checks validate DNS resolution through both upstreams every 15 sec
 
 ```sh
 dig @127.0.0.1 -p 53 cloudflare.com A +short
-dig @127.0.0.1 -p 6053 cloudflare.com A +short
 ```
 
 ## Caveats
