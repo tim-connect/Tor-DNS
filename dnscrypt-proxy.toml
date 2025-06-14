@@ -17,15 +17,12 @@ force_tcp = false
 http3 = false
 http3_probe = false
 
-
-timeout = 10000
-
 timeout = 10000
 keepalive = 30
 blocked_query_response = 'refused'
 
-lb_strategy = 'random'
-lb_estimator = false
+lb_strategy = 'p1'
+lb_estimator = true
 enable_hot_reload = false
 
 log_level = 3
@@ -45,7 +42,7 @@ bootstrap_resolvers = []
 
 ignore_system_dns = true
 netprobe_timeout = 60
-netprobe_address = '9.9.9.9:80'
+netprobe_address = ''
 offline_mode = false
 
 block_ipv6 = true 
@@ -53,12 +50,8 @@ block_unqualified = true
 block_undelegated = true
 reject_ttl = 10
 
-cache = true
-cache_size = 40960 
-cache_min_ttl = 2400
-cache_max_ttl = 86400
-cache_neg_min_ttl = 1 
-cache_neg_max_ttl = 2 
+cache = false
+
 [query_log]
 file = '/dev/null'
 format = 'tsv'
