@@ -44,6 +44,8 @@ Docker health checks validate DNS resolution through both upstreams every 15 sec
 dig @127.0.0.1 -p 53 cloudflare.com A +short
 ```
 
+A cronjob script is also provided, this was the easiest way to make the container have high reliability, usually it runs for days without issue, but this makes it possible to simply forget about.
+
 ## Caveats
 
 This setup is not suitable for all services. While a good upstream for services that can cache responses like AdGuard, Unbound or dnsmasq, it can be an issue for services that may rely on IPs that change often such as DDNS if it accesses the torproxy through a cache.
